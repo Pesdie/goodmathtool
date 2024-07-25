@@ -8,31 +8,16 @@ document.getElementById('multiplyForm').addEventListener('submit', function(even
         document.getElementById('result').innerText = 'Please enter valid numbers.';
         return;
     }
-
     const helloWorldText = 'Hello World ';
-    const totalWords = 10000000;
-    const wpm = 10000;
-    const msPerWord = 10000 / wpm; // milliseconds per word
-    const msPerChar = msPerWord / helloWorldText.length; // milliseconds per character
+    const totalMessagesPerSecond = 100;
+    const interval = 1000 / totalMessagesPerSecond;
     const resultElement = document.getElementById('result');
 
+    let messageCount = 0;
 
-    let currentCharIndex = 0;
-    let currentWordCount = 0;
-
-    function typeHelloWorld() {
-        if (currentWordCount < totalWords) {
-            if (currentCharIndex < helloWorldText.length) {
-                resultElement.innerHTML += helloWorldText.charAt(currentCharIndex);
-                currentCharIndex++;
-                setTimeout(typeHelloWorld, msPerChar);
-            } else {
-                currentCharIndex = 0;
-                currentWordCount++;
-                typeHelloWorld(); // Immediately start the next word
-            }
-        }
+    function appendMessage() {
+        resultElement.innerHTML += helloWorldText;
+        messageCount++;
     }
-
-    typeHelloWorld();
+    const messageInterval = setInterval(appendMessage, interval);
 });
